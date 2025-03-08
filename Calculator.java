@@ -4,7 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-
 public class Calculator extends JFrame {
 
     private JTextField display;
@@ -30,11 +29,11 @@ public class Calculator extends JFrame {
 
         String[] buttons = {
             "C", "x³", "%", "/",
-            "7", "8", "9", "×",
+            "7", "8", "9", "*",
             "4", "5", "6", "-",
             "1", "2", "3", "+",
             "0", ".", "=", "√",
-            "Dark","π","e", "X!"
+            "Dark", "π", "e", "X!"
         };
         for (String text : buttons) {
             JButton button = new JButton(text);
@@ -67,8 +66,7 @@ public class Calculator extends JFrame {
             } else if (text.equals("π")) {
                 button.addActionListener(e -> display.setText(String.valueOf(Math.PI)));
             } else if (text.equals("e")) {
-                button.addActionListener(e -> display.setText(String.valueOf(Math.E)
-                ));
+                button.addActionListener(e -> display.setText(String.valueOf(Math.E)));
             } else {
                 button.addActionListener(new OperatorListener());
             }
@@ -150,14 +148,17 @@ public class Calculator extends JFrame {
                 result *= x;
                 break;
             case "/":
-                
-        if (x != 0) result /= x;
-        else display.setText("Loi : Chia cho 0");
-        break;
-        case "=":
-        result = x;
-        break;
-}
+
+                if (x != 0) {
+                    result /= x;
+                } else {
+                    display.setText("Loi : Chia cho 0");
+                }
+                break;
+            case "=":
+                result = x;
+                break;
+        }
         if (!display.getText().startsWith("Loi")) {
             display.setText(formatResult(result));
         }
